@@ -1,3 +1,29 @@
+# Scripts
+
+Some utility scripts for the Surge network tool.
+
+# Surge for iOS Tutorial
+
+1.  Enable the switches for `HTTP Rewrite`, `MITM`, and `Scripting`.
+
+2.  To configure the MITM certificate, tap on **Configure CA** under the MITM section.
+    * If your proxy provider offers a Surge managed service, you will most likely see a pre-generated certificate.
+    * If you do not see one, click the button to generate a new certificate.
+
+3.  Tap **Install CA Certificate to System** and follow the prompts provided by Surge. (This will involve downloading and installing a configuration profile. Afterwards, you will need to go to your iOS **Settings > General > About > Certificate Trust Settings** and enable full trust for the newly installed certificate).
+
+4.  
+    * If the configuration profile you just installed already included a pre-generated certificate, you can simply tap **Cancel** in the top-left corner to return to the main Surge screen after installation is complete (your certificate is already configured).
+    * If you generated the certificate yourself just now, please tap **Done** in the top-right corner to save it.
+
+5.  To enable modules, tap the **Modules** button under the Module section.
+    * Tap the **Install Modules** button.
+    * Paste the GitHub raw link for the `.sgmodule` file, which is typically named after the software you intend to modify.
+    * After confirming the installation, ensure there is a checkmark to the left of the newly installed module, which indicates it is enabled.
+    * Tap **Done** in the top-right corner to confirm.
+
+
+
 # 使用教程（Surge for iOS）
 * 开启http rewrite, mitm, scripting的开关
 * 配置mitm证书
