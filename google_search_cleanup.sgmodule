@@ -2,7 +2,7 @@
 #!desc=Remove sponsored results and AI Overviews from Google Search pages
 
 [Script]
-google-search-cleanup = type=http-response,pattern=^https:\/\/(?:www|encrypted)\.google\.[^\/]+\/search(?:[?#]|$),requires-body=true,max-size=5242880,script-path=https://raw.githubusercontent.com/cyberenchanter/scripts/main/js/google_search_cleanup.js
+google-search-cleanup = type=http-response,pattern=^https:\/\/(?:www|encrypted)\.google\.[^\/]+\/search(?:[?#]|$),requires-body=true,max-size=5242880,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/google_search_cleanup.js
 
 [MITM]
 hostname = %APPEND% www.google.*, encrypted.google.*
