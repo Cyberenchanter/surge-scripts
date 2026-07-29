@@ -1,19 +1,14 @@
 #!name=Bilibili Feed Cleanup
-#!desc=Intended for desktop version of Bilibili web only. Strips ads and sponsored videos from the homepage recommendation and search API responses, plus live streaming from the homepage recommendation. Use bilibili_feed_cleanup_frontend for the page-injection equivalent.
-
-[Rule]
-# VIP ad creatives (position=52/53 etc.) — serves nothing but ads.
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/vip\/ads\/,REJECT
-# Ad slot resources: homepage banners and sidebar promos keyed by loc id.
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-show\/res\/locs\?,REJECT
-# OGV recommendations — the bangumi/course promo cards (.floor-single-card).
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-interface\/index\/ogv\/rcmd\?,REJECT
-# Live room recommendations. NOTE: also used by live.bilibili.com itself.
-URL-REGEX,^https:\/\/api\.live\.bilibili\.com\/xlive\/web-interface\/v1\/webMain\/getMoreRecList,REJECT
+#!desc=Intended for desktop version of Bilibili web only. Removes ads, sponsored videos, live streaming and promo floor cards (anime/course plugs) from the homepage feed and search results. Works in two layers: a script injected into the homepage document handles cards preloaded into the HTML, and a response filter handles the recommendation and search APIs.
 
 [Script]
+# Homepage document — DOM pass. Also covers the first screen of cards, which
+# bilibili server-renders into the HTML instead of fetching from the feed API.
+bilibili-page-cleanup = type=http-response,pattern=^https:\/\/www\.bilibili\.com\/(?:index\.html)?(?:[?#]|$),requires-body=true,max-size=10485760,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup_frontend.js
+# Homepage recommendation API — every page of the feed after the first.
 bilibili-feed-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?index\/top\/feed\/rcmd\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
+# Search API — not reachable by the DOM pass, which only injects on the homepage.
 bilibili-search-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?search\/all\/v2\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
 
 [MITM]
-hostname = %APPEND% api.bilibili.com api.live.bilibili.com
+hostname = %APPEND% www.bilibili.com api.bilibili.com
