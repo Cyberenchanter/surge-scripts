@@ -6,7 +6,7 @@
   if (
     typeof body !== "string" ||
     !body ||
-    body.indexOf('id="surge-bilibili-home-cleanup"') !== -1
+    body.indexOf('id="surge-bilibili-feed-cleanup"') !== -1
   ) {
     $done({});
     return;
@@ -39,7 +39,7 @@
   var hiddenSelectors = [".floor-single-card", "[data-surge-bili-ad]"];
 
   var style =
-    '<style id="surge-bilibili-home-cleanup"' +
+    '<style id="surge-bilibili-feed-cleanup"' +
     nonceAttribute +
     ">" +
     hiddenSelectors.join(",") +
@@ -124,7 +124,7 @@
   ].join("");
 
   var script =
-    '<script id="surge-bilibili-home-cleanup-runtime"' +
+    '<script id="surge-bilibili-feed-cleanup-runtime"' +
     nonceAttribute +
     ">" +
     pageScript +
