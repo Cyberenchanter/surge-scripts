@@ -1,8 +1,9 @@
 #!name=Bilibili Feed Cleanup
-#!desc=Intended for desktop version of Bilibili web only. Strips ads, sponsored videos and live streaming from the homepage recommendation API response. Use bilibili_feed_cleanup_frontend for the page-injection equivalent.
+#!desc=Intended for desktop version of Bilibili web only. Strips ads and sponsored videos from the homepage recommendation and search API responses, plus live streaming from the homepage recommendation. Use bilibili_feed_cleanup_frontend for the page-injection equivalent.
 
 [Script]
-bilibili-feed-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?index\/top\/(?:feed\/)?rcmd\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
+bilibili-feed-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?index\/top\/feed\/rcmd\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
+bilibili-search-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?search\/all\/v2\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
 
 [MITM]
 hostname = %APPEND% api.bilibili.com
