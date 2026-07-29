@@ -1,0 +1,17 @@
+#!name=YouTube Shorts Cleanup (iOS app)
+#!desc=Intended for the YouTube iOS app only; the desktop web version is a separate module. Removes the Shorts shelf from the home feed and search results. The app asks InnerTube for protobuf rather than JSON, so the filter edits the wire format directly: it locates the section list, drops the sections that are Shorts, and copies every other byte through unchanged. The watch page is not filtered.
+
+[Header Rewrite]
+# The app accepts brotli and Google uses it. Asking for identity instead costs
+# bandwidth but hands the script raw protobuf, with no dependence on Surge
+# decoding and re-encoding the body around it.
+^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(?:browse|search) header-replace accept-encoding identity
+
+[Script]
+# binary-body-mode is what makes $response.bodyBytes available. Without it the
+# body arrives as a string and the protobuf is already corrupted.
+youtube-mobile-browse-cleanup = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/browse(?:[?#]|$),requires-body=true,binary-body-mode=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/youtube_shorts_cleanup_mobile.js
+youtube-mobile-search-cleanup = type=http-response,pattern=^https:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/search(?:[?#]|$),requires-body=true,binary-body-mode=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/youtube_shorts_cleanup_mobile.js
+
+[MITM]
+hostname = %APPEND% youtubei.googleapis.com
