@@ -3,13 +3,13 @@
 
 [Rule]
 # VIP ad creatives (position=52/53 etc.) — serves nothing but ads.
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/vip\/ads\/,REJECT-DICT
+URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/vip\/ads\/,REJECT
 # Ad slot resources: homepage banners and sidebar promos keyed by loc id.
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-show\/res\/locs\?,REJECT-DICT
+URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-show\/res\/locs\?,REJECT
 # OGV recommendations — the bangumi/course promo cards (.floor-single-card).
-URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-interface\/index\/ogv\/rcmd\?,REJECT-DICT
+URL-REGEX,^https:\/\/api\.bilibili\.com\/x\/web-interface\/index\/ogv\/rcmd\?,REJECT
 # Live room recommendations. NOTE: also used by live.bilibili.com itself.
-URL-REGEX,^https:\/\/api\.live\.bilibili\.com\/xlive\/web-interface\/v1\/webMain\/getMoreRecList,REJECT-DICT
+URL-REGEX,^https:\/\/api\.live\.bilibili\.com\/xlive\/web-interface\/v1\/webMain\/getMoreRecList,REJECT
 
 [Script]
 bilibili-feed-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?index\/top\/feed\/rcmd\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
