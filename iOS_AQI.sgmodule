@@ -2,7 +2,7 @@
 #!desc=Change iOS weather AQI
 
 [Script]
-iOS14_AQI.js = requires-body=1,script-path=https://raw.githubusercontent.com/cpphut/scripts/main/js/iOS14_AQI.js,type=http-response,pattern=https://weather-data.apple.com/v1/weather/[\w-]+/[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\?
-iOS15_AQI.js = requires-body=1,script-path=https://raw.githubusercontent.com/cpphut/scripts/main/js/iOS15_AQI.js,type=http-response,pattern=https://weather-data.apple.com/v2/weather/[\w-]+/[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\?
+iOS14_AQI.js = requires-body=1,script-path=https://raw.githubusercontent.com/cpphut/surge-scripts/main/js/iOS14_AQI.js,type=http-response,pattern=https://weather-data.apple.com/v1/weather/[\w-]+/[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\?
+iOS15_AQI.js = requires-body=1,script-path=https://raw.githubusercontent.com/cpphut/surge-scripts/main/js/iOS15_AQI.js,type=http-response,pattern=https://weather-data.apple.com/v2/weather/[\w-]+/[0-9]+\.[0-9]+/[0-9]+\.[0-9]+\?
 [MITM]
 hostname = %APPEND% weather-data.apple.com

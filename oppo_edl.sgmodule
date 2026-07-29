@@ -1,9 +1,9 @@
 #!name=Oppo EDL API Mock
 #!desc=Credits to dekefake and oppo_edl_hacker at XDA.
 [Script]
-Oppo_EDL = type=http-request,pattern=^https?:\/\/(.*?)\.allawntech\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/scripts/main/js/oppo_edl.js
-Oppo_EDL2 = type=http-request,pattern=^https?:\/\/(.*?)\.coloros\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/scripts/main/js/oppo_edl.js
-Oppo_EDL3 = type=http-request,pattern=^https?:\/\/(.*?)\.realmeservice\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/scripts/main/js/oppo_edl.js
+Oppo_EDL = type=http-request,pattern=^https?:\/\/(.*?)\.allawntech\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/oppo_edl.js
+Oppo_EDL2 = type=http-request,pattern=^https?:\/\/(.*?)\.coloros\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/oppo_edl.js
+Oppo_EDL3 = type=http-request,pattern=^https?:\/\/(.*?)\.realmeservice\.com(.*),script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/oppo_edl.js
 
 [MITM]
 hostname = %APPEND% *.allawnfs.com, *.allawntech.com, diagnostic-tool.coloros.com, *.realmeservice.com
