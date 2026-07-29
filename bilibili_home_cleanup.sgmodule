@@ -1,5 +1,5 @@
 #!name=Bilibili Home Cleanup
-#!desc=Remove ads, sponsored videos and promo floor cards (anime/course/live plugs) from the bilibili homepage feed
+#!desc=Remove ads, sponsored videos, live streams and promo floor cards (anime/course plugs) from the bilibili homepage feed
 
 [Script]
 bilibili-home-cleanup = type=http-response,pattern=^https:\/\/www\.bilibili\.com\/(?:index\.html)?(?:[?#]|$),requires-body=true,max-size=10485760,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_home_cleanup.js

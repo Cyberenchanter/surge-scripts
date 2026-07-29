@@ -53,7 +53,7 @@
     "(function(){",
     '"use strict";',
     // Outermost grid item, so hiding an inner card never leaves an empty wrapper cell.
-    "var cardClasses=['feed-card','bili-feed-card','floor-single-card','bili-video-card'];",
+    "var cardClasses=['feed-card','bili-feed-card','floor-single-card','bili-video-card','bili-live-card'];",
     "function outermostCard(el){",
     "var node=el,found=null;",
     "while(node&&node!==document.body){",
@@ -94,6 +94,12 @@
     "var icons=root.querySelectorAll?root.querySelectorAll('.bili-video-card__stats>svg.vui_icon'):[];",
     "for(var i=0;i<icons.length;i++){hide(icons[i]);}",
     "}",
+    // Live rooms are a distinct component (bili-live-card) wrapped in the usual
+    // bili-feed-card grid cell, so hide the wrapper and not just the inner card.
+    "function hideLiveCards(root){",
+    "var lives=root.querySelectorAll?root.querySelectorAll('.bili-live-card'):[];",
+    "for(var i=0;i<lives.length;i++){hide(lives[i]);}",
+    "}",
     "function hideFloorCards(root){",
     "var floors=root.querySelectorAll?root.querySelectorAll('.floor-single-card'):[];",
     "for(var i=0;i<floors.length;i++){",
@@ -104,6 +110,7 @@
     "hideAdLinks(document);",
     "hideAdBadges(document);",
     "hideRocketCards(document);",
+    "hideLiveCards(document);",
     "hideFloorCards(document);",
     "}",
     "clean();",
