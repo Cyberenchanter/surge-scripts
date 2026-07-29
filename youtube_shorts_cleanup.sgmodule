@@ -1,0 +1,15 @@
+#!name=YouTube Shorts Cleanup
+#!desc=Intended for desktop YouTube web only. Removes the Shorts shelf from the home feed and search results, along with any loose Shorts card in either. Works in two layers: a script injected into the document handles the first screen of the home feed, which YouTube server-renders into ytInitialData, and a response filter handles the browse and search APIs behind every later page. The watch page sidebar is not filtered — no captured response served Shorts there.
+
+[Script]
+# Document pass — home, search, watch and the feed pages, all of which ship
+# their first screen inside ytInitialData rather than fetching it.
+youtube-page-cleanup = type=http-response,pattern=^https:\/\/www\.youtube\.com\/(?:$|[?#]|results(?:[?#]|$)|watch(?:[?#]|$)|feed\/|@|channel\/|playlist(?:[?#]|$)),requires-body=true,max-size=10485760,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/youtube_shorts_cleanup_frontend.js
+# Home feed API — every page of the feed after the first, plus the feed pages
+# reached by an in-page navigation.
+youtube-browse-cleanup = type=http-response,pattern=^https:\/\/www\.youtube\.com\/youtubei\/v1\/browse(?:[?#]|$),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/youtube_shorts_cleanup.js
+# Search API — first page and continuations both.
+youtube-search-cleanup = type=http-response,pattern=^https:\/\/www\.youtube\.com\/youtubei\/v1\/search(?:[?#]|$),requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/youtube_shorts_cleanup.js
+
+[MITM]
+hostname = %APPEND% www.youtube.com
