@@ -5,6 +5,9 @@
 # Homepage document — DOM pass. Also covers the first screen of cards, which
 # bilibili server-renders into the HTML instead of fetching from the feed API.
 bilibili-page-cleanup = type=http-response,pattern=^https:\/\/www\.bilibili\.com\/(?:index\.html)?(?:[?#]|$),requires-body=true,max-size=10485760,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup_frontend.js
+# Playback document — DOM pass. The player-page ad slots ship inside the HTML
+# too (window.__INITIAL_STATE__.adData), so there is no request to filter.
+bilibili-video-cleanup = type=http-response,pattern=^https:\/\/www\.bilibili\.com\/video\/,requires-body=true,max-size=10485760,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup_frontend.js
 # Homepage recommendation API — every page of the feed after the first.
 bilibili-feed-cleanup = type=http-response,pattern=^https:\/\/api\.bilibili\.com\/x\/web-interface\/(?:wbi\/)?index\/top\/feed\/rcmd\?,requires-body=true,max-size=0,script-path=https://raw.githubusercontent.com/cyberenchanter/surge-scripts/main/js/bilibili_feed_cleanup.js
 # Search API — not reachable by the DOM pass, which only injects on the homepage.

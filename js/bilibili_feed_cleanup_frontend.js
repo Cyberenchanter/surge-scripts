@@ -36,7 +36,18 @@
 
   // Promo "floor" cards (bangumi/anime, courses, live plugs) are always ads-by-another-name,
   // so they can be hidden by class alone. Everything else needs the page-side pass below.
-  var hiddenSelectors = [".floor-single-card", "[data-surge-bili-ad]"];
+  var hiddenSelectors = [
+    ".floor-single-card",
+    "[data-surge-bili-ad]",
+    // Playback-page ad slots. Each of these is already the outermost container of
+    // its slot, and the creative ships inside the document (window.__INITIAL_STATE__
+    // .adData, keyed by loc id), so CSS alone removes them with no flash and no
+    // request to intercept. Deliberately not keying on [data-loc-id]: the homepage
+    // banner carousel carries it too, and that is out of scope.
+    ".video-card-ad-small", // 视频推广 card beside the player (loc 4331)
+    "#slide_ad", // slide-in promo under the player (loc 2626)
+    ".ad-report" // strip/left-banner and right-bottom banner (loc 2629 / 3039)
+  ];
 
   var style =
     '<style id="surge-bilibili-feed-cleanup"' +
